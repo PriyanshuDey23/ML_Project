@@ -1,0 +1,5 @@
+#-e .  # To run the setup as well as requirements , Run it separately, after installing
+pandas
+numpy
+seaborn
+
