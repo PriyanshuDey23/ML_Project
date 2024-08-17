@@ -1,5 +1,8 @@
 #-e .  # To run the setup as well as requirements , Run it separately, after installing
+       # The above one is run at last
 pandas
 numpy
 seaborn
+matplotlib
+scikit-learn
 
