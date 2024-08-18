@@ -5,4 +5,5 @@ numpy
 seaborn
 matplotlib
 scikit-learn
+dill
 
