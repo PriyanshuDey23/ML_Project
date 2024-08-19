@@ -6,6 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass  # Create class variable
 from src.components.data_transformation import DataTransformation,DataTransformationConfig
+from src.components.model_trainer import ModelTrainer
 
 
 
@@ -67,6 +68,13 @@ if __name__=="__main__":
     object=DataIngestion()
     train_data,test_data=object.initiate_data_ingestion()
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    #data_transformation.initiate_data_transformation(train_data,test_data)
 
 # Pickle file will be generated in the artifacts
+
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+    model_trainer=ModelTrainer()
+    print(model_trainer.Initiate_Model_Trainer(train_arr,test_arr))
+
+# Model .pkl file is created
+
