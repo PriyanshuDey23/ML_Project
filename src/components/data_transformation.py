@@ -38,8 +38,8 @@ class DataTransformation:
             # For Handling the missing values
             num_pipeline=Pipeline(
                 steps=[
-                    ("Imputer",SimpleImputer(strategy="median")), # median
-                    ("Scaler",StandardScaler())
+                ("Imputer",SimpleImputer(strategy="median")), # median
+                ("Scaler",StandardScaler())
                 ]
             )
 
@@ -47,9 +47,9 @@ class DataTransformation:
 
             cat_pipeline=Pipeline(
                 steps=[
-                    ("Imputer",SimpleImputer(strategy="most_Frequent")), # Mode
-                    ("One_Hot_Encoder",OneHotEncoder()),
-                    ("Scaler",StandardScaler())  
+                ("Imputer",SimpleImputer(strategy="most_frequent")), # Mode
+                ("One_Hot_Encoder",OneHotEncoder(sparse_output=True)), # Default is sparse # sparse_output=True: The encoder outputs a sparse matrix. Sparse matrices are memory-efficient representations of large matrices with a lot of zeros. 
+                ("Scaler",StandardScaler(with_mean=False)) # Prevent centering #with_mean=False: This prevents the StandardScaler from subtracting the mean from each feature.
                 ]
             )
 
@@ -60,8 +60,8 @@ class DataTransformation:
 
             preprocessor=ColumnTransformer(
                 [
-                    ("Numerical_Pipeline",num_pipeline,numerical_columns),
-                    ("Categorical_Pipeline",cat_pipeline,categorical_columns)
+                ("Numerical_Pipeline",num_pipeline,numerical_columns),
+                ("Categorical_Pipeline",cat_pipeline,categorical_columns)
                 ]
             )
 
@@ -87,7 +87,7 @@ class DataTransformation:
             target_column_name="math_score"
             
 
-            input_feature_train_df=train_df.drop(columns=[target_column_name])
+            input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
             target_feature_train_df=train_df[target_column_name]
 
             input_feature_test_df=test_df.drop(columns=[target_column_name],axis=1)
@@ -95,9 +95,12 @@ class DataTransformation:
 
             logging.info( f"Applying preprocessing object on training dataframe and testing dataframe.")
 
-            train_arr = np.c_[input_feature_train_df, np.array(target_feature_train_df)] #np.c_ -> concat
+            input_feature_train_arr=preprocessing_object.fit_transform(input_feature_train_df)
+            input_feature_test_arr=preprocessing_object.transform(input_feature_test_df)
+
+            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)] #np.c_ -> concat
             
-            test_arr = np.c_[input_feature_test_df, np.array(target_feature_test_df)]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
             logging.info(f"Saved preprocessing object.")
 

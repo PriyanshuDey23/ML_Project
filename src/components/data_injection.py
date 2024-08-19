@@ -8,6 +8,7 @@ from dataclasses import dataclass  # Create class variable
 from src.components.data_transformation import DataTransformation,DataTransformationConfig
 
 
+
 @dataclass   # Create class variables
 class DataIngestionConfig: # Where I will save the raw,train,test data (Providing input thing for data injection component)
     train_data_path: str=os.path.join('artifacts','train.csv') # Input # In the artifact folder , all the outputs will be stored
@@ -62,10 +63,10 @@ class DataIngestion: # Input from data ingest config
 
 # Starting the data ingestion( checking), after data transformation
 
-# if __name__=="__main__":
-#     object=DataIngestion()
-#     train_data,test_data=object.initiate_data_ingestion()
-#     data_transformation=DataTransformation()
-#     data_transformation.initiate_data_transformation(train_data,test_data)
+if __name__=="__main__":
+    object=DataIngestion()
+    train_data,test_data=object.initiate_data_ingestion()
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
 
 # Pickle file will be generated in the artifacts
