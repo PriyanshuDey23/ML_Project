@@ -103,7 +103,9 @@ class ModelTrainer:
             best_model_score=max(sorted(model_report.values())) # Sort model score based on values
 
             # To Get the best model name from dictionary
-            best_model_name = max(model_report, key=model_report.get)  # Key is the model name
+            best_model_name = list(model_report.keys())[
+                list(model_report.values()).index(best_model_score)
+            ]  # Key is the model name
             
             
             best_model=models[best_model_name] # name
@@ -125,9 +127,9 @@ class ModelTrainer:
             predicted=best_model.predict(x_test)
 
             # Accuracy
-            r2=r2_score(y_test,predicted)
+            r2_square=r2_score(y_test,predicted)
 
-            return r2
+            return r2_square
 
 
         except Exception as e:

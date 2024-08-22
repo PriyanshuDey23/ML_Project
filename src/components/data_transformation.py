@@ -48,7 +48,7 @@ class DataTransformation:
             cat_pipeline=Pipeline(
                 steps=[
                 ("Imputer",SimpleImputer(strategy="most_frequent")), # Mode
-                ("One_Hot_Encoder",OneHotEncoder(sparse_output=True)), # Default is sparse # sparse_output=True: The encoder outputs a sparse matrix. Sparse matrices are memory-efficient representations of large matrices with a lot of zeros. 
+                ("One_Hot_Encoder",OneHotEncoder(handle_unknown='infrequent_if_exist')), # Default is sparse # sparse_output=True: The encoder outputs a sparse matrix. Sparse matrices are memory-efficient representations of large matrices with a lot of zeros. 
                 ("Scaler",StandardScaler(with_mean=False)) # Prevent centering #with_mean=False: This prevents the StandardScaler from subtracting the mean from each feature.
                 ]
             )
@@ -85,6 +85,7 @@ class DataTransformation:
             preprocessing_object=self.get_data_transformer_object()
 
             target_column_name="math_score"
+            numerical_columns = ["writing_score", "reading_score"]
             
 
             input_feature_train_df=train_df.drop(columns=[target_column_name],axis=1)
