@@ -49,23 +49,15 @@ class ModelTrainer:
          # Hyper Parameter Tuning
             params = {
                 "Random Forest": {
-                    'n_estimators': [50, 100, 200],
-                    'max_depth': [None, 10, 20, 30],
-                    'min_samples_split': [2, 5, 10],
-                    'min_samples_leaf': [1, 2, 4],
-                    'bootstrap': [True, False]
+                    'n_estimators': [8,16,32,64,128,256]
                 },
                 "Decision Tree": {
-                    'max_depth': [None, 10, 20, 30],
-                    'min_samples_split': [2, 5, 10],
-                    'min_samples_leaf': [1, 2, 4],
-                    'criterion': ['mse', 'friedman_mse', 'mae']
+                    'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson']
                 },
                 "Gradient Boosting": {
-                    'n_estimators': [50, 100, 200],
-                    'learning_rate': [0.01, 0.1, 0.5, 1.0],
-                    'max_depth': [3, 5, 7],
-                    'subsample': [0.8, 0.9, 1.0]
+                    'learning_rate':[.1,.01,.05,.001],
+                    'subsample':[0.6,0.7,0.75,0.8,0.85,0.9],
+                    'n_estimators': [8,16,32,64,128,256]
                 },
 
                 "Linear Regression":{},

@@ -48,7 +48,7 @@ class DataTransformation:
             cat_pipeline=Pipeline(
                 steps=[
                 ("Imputer",SimpleImputer(strategy="most_frequent")), # Mode
-                ("One_Hot_Encoder",OneHotEncoder(handle_unknown='infrequent_if_exist')), # Default is sparse # sparse_output=True: The encoder outputs a sparse matrix. Sparse matrices are memory-efficient representations of large matrices with a lot of zeros. 
+                ("One_Hot_Encoder",OneHotEncoder(handle_unknown='ignore')), # Default is sparse # sparse_output=True: The encoder outputs a sparse matrix. Sparse matrices are memory-efficient representations of large matrices with a lot of zeros. 
                 ("Scaler",StandardScaler(with_mean=False)) # Prevent centering #with_mean=False: This prevents the StandardScaler from subtracting the mean from each feature.
                 ]
             )
